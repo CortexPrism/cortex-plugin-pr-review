@@ -1,0 +1,184 @@
+{
+  "name": "cortex-plugin-pr-review",
+  "version": "1.0.0",
+  "description": "Automated PR code review — analyze diffs, check for bugs, security issues, and style violations, then comment inline with fix suggestions",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-pr-review",
+  "homepage": "https://cortexprism.io/marketplace/plugins/pr-review",
+  "capabilities": [
+    "tools",
+    "network:fetch",
+    "fs:read"
+  ],
+  "tools": [
+    {
+      "name": "review_pr",
+      "description": "Perform a comprehensive code review on a GitHub pull request. Analyzes the diff for bugs, security vulnerabilities, style issues, and performance concerns. Can post inline comments and a summary review.",
+      "params": [
+        {
+          "name": "repo",
+          "type": "string",
+          "description": "GitHub repository in owner/name format (e.g., 'CortexPrism/cortex')",
+          "required": true
+        },
+        {
+          "name": "pr_number",
+          "type": "number",
+          "description": "Pull request number to review",
+          "required": true
+        },
+        {
+          "name": "post_comments",
+          "type": "boolean",
+          "description": "Whether to post review comments to the PR (default: false, dry-run)",
+          "required": false
+        },
+        {
+          "name": "severity",
+          "type": "string",
+          "description": "Minimum severity to report",
+          "required": false,
+          "enum": ["info", "warning", "error", "critical"]
+        }
+      ]
+    },
+    {
+      "name": "analyze_diff",
+      "description": "Analyze a raw git diff for issues. Useful for local changes or when a PR URL is not available.",
+      "params": [
+        {
+          "name": "diff",
+          "type": "string",
+          "description": "Raw git diff content to analyze",
+          "required": true
+        },
+        {
+          "name": "language",
+          "type": "string",
+          "description": "Primary programming language of the diff (helps rule selection)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "check_security",
+      "description": "Deep security analysis of a diff or file contents. Checks for OWASP Top 10 vulnerabilities, hardcoded secrets, unsafe patterns, and dependency risks.",
+      "params": [
+        {
+          "name": "content",
+          "type": "string",
+          "description": "Code content to analyze for security issues",
+          "required": true
+        },
+        {
+          "name": "file_path",
+          "type": "string",
+          "description": "Path of the file being analyzed (helps with language detection)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "check_style",
+      "description": "Check code for style and best practice violations based on the detected language conventions.",
+      "params": [
+        {
+          "name": "content",
+          "type": "string",
+          "description": "Code content to check for style issues",
+          "required": true
+        },
+        {
+          "name": "language",
+          "type": "string",
+          "description": "Programming language (typescript, python, go, rust, etc.)",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "suggest_fixes",
+      "description": "Generate specific fix suggestions for issues found in a code snippet. Returns diff-ready patches.",
+      "params": [
+        {
+          "name": "code_snippet",
+          "type": "string",
+          "description": "The code snippet that needs fixing",
+          "required": true
+        },
+        {
+          "name": "issue_description",
+          "type": "string",
+          "description": "Description of the issue to fix",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "review_checks",
+      "description": "List or run the available review check categories (bugs, security, style, performance, complexity).",
+      "params": [
+        {
+          "name": "action",
+          "type": "string",
+          "description": "Action to perform",
+          "required": false,
+          "enum": ["list", "run"]
+        },
+        {
+          "name": "categories",
+          "type": "string",
+          "description": "Comma-separated categories to run (only when action is 'run')",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "peerDependencies": {
+    "cortex": ">=1.0.0"
+  },
+  "ui": {
+    "settings": [
+      {
+        "section": "General",
+        "fields": [
+          {
+            "key": "githubToken",
+            "label": "GitHub Token",
+            "type": "secret",
+            "description": "GitHub personal access token for PR API access and posting comments"
+          },
+          {
+            "key": "autoApprove",
+            "label": "Auto-Approve Threshold",
+            "type": "select",
+            "defaultValue": "none",
+            "options": [
+              { "label": "Never", "value": "none" },
+              { "label": "Info Only", "value": "info_only" },
+              { "label": "Warning Max", "value": "warning_max" }
+            ],
+            "description": "Automatically approve PRs when findings are below this severity"
+          },
+          {
+            "key": "maxFilesToReview",
+            "label": "Max Files Per Review",
+            "type": "number",
+            "defaultValue": 50,
+            "description": "Maximum number of changed files to review in a single PR"
+          }
+        ]
+      }
+    ]
+  },
+  "aiDisclosure": {
+    "tools": [
+      "Claude Code (Anthropic) — initial scaffold and implementation"
+    ],
+    "humanReview": true
+  }
+}
