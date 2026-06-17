@@ -1,6 +1,7 @@
 # CortexPrism PR Review Agent
 
-Automated code review on pull requests — analyzes diffs for bugs, security issues, style violations, and performance concerns. Posts inline comments and summary reviews to GitHub.
+Automated code review on pull requests — analyzes diffs for bugs, security issues, style violations,
+and performance concerns. Posts inline comments and summary reviews to GitHub.
 
 ## Installation
 
@@ -18,21 +19,23 @@ cortex plugin install .
 
 ## Configuration
 
-| Setting | Type | Default | Description |
-|---------|------|---------|-------------|
-| `githubToken` | string (secret) | — | GitHub personal access token for PR API access and posting comments |
-| `autoApprove` | string | `none` | Auto-approval threshold: `none`, `info_only`, or `warning_max` |
-| `maxFilesToReview` | number | `50` | Maximum number of changed files to review in a single PR |
+| Setting            | Type            | Default | Description                                                         |
+| ------------------ | --------------- | ------- | ------------------------------------------------------------------- |
+| `githubToken`      | string (secret) | —       | GitHub personal access token for PR API access and posting comments |
+| `autoApprove`      | string          | `none`  | Auto-approval threshold: `none`, `info_only`, or `warning_max`      |
+| `maxFilesToReview` | number          | `50`    | Maximum number of changed files to review in a single PR            |
 
 ### GitHub Token Permissions
 
 Your token needs:
+
 - `repo` scope for private repos
 - `public_repo` scope for public repos
 
 ## Tools
 
 ### `review_pr`
+
 Perform a comprehensive code review on a GitHub PR.
 
 ```json
@@ -45,6 +48,7 @@ Perform a comprehensive code review on a GitHub PR.
 ```
 
 ### `analyze_diff`
+
 Analyze a raw git diff for issues. Useful for local changes.
 
 ```json
@@ -55,7 +59,9 @@ Analyze a raw git diff for issues. Useful for local changes.
 ```
 
 ### `check_security`
-Deep security analysis — checks for hardcoded secrets, unsafe functions, injection risks, and OWASP Top 10 patterns.
+
+Deep security analysis — checks for hardcoded secrets, unsafe functions, injection risks, and OWASP
+Top 10 patterns.
 
 ```json
 {
@@ -65,6 +71,7 @@ Deep security analysis — checks for hardcoded secrets, unsafe functions, injec
 ```
 
 ### `check_style`
+
 Check code for style and best practice violations by language.
 
 ```json
@@ -75,6 +82,7 @@ Check code for style and best practice violations by language.
 ```
 
 ### `suggest_fixes`
+
 Generate specific fix suggestions for code issues. Returns diff-ready patches.
 
 ```json
@@ -85,6 +93,7 @@ Generate specific fix suggestions for code issues. Returns diff-ready patches.
 ```
 
 ### `review_checks`
+
 List available review check categories.
 
 ```json
@@ -93,13 +102,13 @@ List available review check categories.
 
 ## Check Categories
 
-| Category | What It Checks |
-|----------|---------------|
-| **Security** | Hardcoded secrets, eval(), dangerouslySetInnerHTML, SQL injection patterns |
-| **Bugs** | console.log leftovers, empty catch blocks, async/await patterns |
-| **Style** | var usage, loose equality, naming conventions |
-| **Performance** | innerHTML +=, synchronous loops, redundant operations |
-| **Complexity** | Deep nesting (>3 levels), long functions |
+| Category        | What It Checks                                                             |
+| --------------- | -------------------------------------------------------------------------- |
+| **Security**    | Hardcoded secrets, eval(), dangerouslySetInnerHTML, SQL injection patterns |
+| **Bugs**        | console.log leftovers, empty catch blocks, async/await patterns            |
+| **Style**       | var usage, loose equality, naming conventions                              |
+| **Performance** | innerHTML +=, synchronous loops, redundant operations                      |
+| **Complexity**  | Deep nesting (>3 levels), long functions                                   |
 
 ## Usage Example
 
@@ -113,10 +122,10 @@ List available review check categories.
 
 ## Capabilities
 
-| Capability | Purpose |
-|------------|---------|
+| Capability      | Purpose                                                     |
+| --------------- | ----------------------------------------------------------- |
 | `network:fetch` | GitHub API access for fetching PR diffs and posting reviews |
-| `fs:read` | Local diff and file analysis |
+| `fs:read`       | Local diff and file analysis                                |
 
 ## Development
 

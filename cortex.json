@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-pr-review",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automated PR code review — analyze diffs, check for bugs, security issues, and style violations, then comment inline with fix suggestions",
   "kind": "esm",
   "entryPoint": "mod.ts",
