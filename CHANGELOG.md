@@ -1,6 +1,21 @@
-# Changelog — PR Review Agent
+# Changelog
 
+## [Unreleased]
 
+### Changed
+- Renamed manifest file from `cortex.json` to `manifest.json` for consistency with Cortex standard
+- Standardized UI section structure to `ui.settings` format
+- Normalized parameter naming: `defaultValue` → `default`, `options` → `enum`
+- Added `homepage` field with repository URL
+- Added `dependencies` field to manifest
+
+### Fixed
+- Replaced `console.error` with `ctx.logger.error` in GitHub review posting helper
+
+## [1.0.1] — 2026-06-15
+
+### Added
+- Initial release
 ## [1.0.1] — 2026-06-17
 
 ### Fixed

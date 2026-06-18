@@ -1,7 +1,7 @@
 {
   "name": "cortex-plugin-pr-review",
-  "version": "1.0.1",
-  "description": "Automated PR code review — analyze diffs, check for bugs, security issues, and style violations, then comment inline with fix suggestions",
+  "version": "1.0.2",
+  "description": "Automated PR code review \u2014 analyze diffs, check for bugs, security issues, and style violations, then comment inline with fix suggestions",
   "kind": "esm",
   "entryPoint": "mod.ts",
   "runtime": "deno",
@@ -42,7 +42,12 @@
           "type": "string",
           "description": "Minimum severity to report",
           "required": false,
-          "enum": ["info", "warning", "error", "critical"]
+          "enum": [
+            "info",
+            "warning",
+            "error",
+            "critical"
+          ]
         }
       ]
     },
@@ -127,7 +132,10 @@
           "type": "string",
           "description": "Action to perform",
           "required": false,
-          "enum": ["list", "run"]
+          "enum": [
+            "list",
+            "run"
+          ]
         },
         {
           "name": "categories",
@@ -138,6 +146,7 @@
       ]
     }
   ],
+  "dependencies": {},
   "peerDependencies": {
     "cortex": ">=1.0.0"
   },
@@ -156,20 +165,29 @@
             "key": "autoApprove",
             "label": "Auto-Approve Threshold",
             "type": "select",
-            "defaultValue": "none",
-            "options": [
-              { "label": "Never", "value": "none" },
-              { "label": "Info Only", "value": "info_only" },
-              { "label": "Warning Max", "value": "warning_max" }
-            ],
-            "description": "Automatically approve PRs when findings are below this severity"
+            "description": "Automatically approve PRs when findings are below this severity",
+            "default": "none",
+            "enum": [
+              {
+                "label": "Never",
+                "value": "none"
+              },
+              {
+                "label": "Info Only",
+                "value": "info_only"
+              },
+              {
+                "label": "Warning Max",
+                "value": "warning_max"
+              }
+            ]
           },
           {
             "key": "maxFilesToReview",
             "label": "Max Files Per Review",
             "type": "number",
-            "defaultValue": 50,
-            "description": "Maximum number of changed files to review in a single PR"
+            "description": "Maximum number of changed files to review in a single PR",
+            "default": 50
           }
         ]
       }
@@ -177,7 +195,7 @@
   },
   "aiDisclosure": {
     "tools": [
-      "Claude Code (Anthropic) — initial scaffold and implementation"
+      "Claude Code (Anthropic) \u2014 initial scaffold and implementation"
     ],
     "humanReview": true
   }
