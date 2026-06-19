@@ -1,4 +1,4 @@
-import { assertEquals, assertStringIncludes } from 'https://deno.land/std@0.208.0/assert/mod.ts';
+import { assertEquals } from 'https://deno.land/std@0.208.0/assert/mod.ts';
 import { tools } from '../../mod.ts';
 import type { PluginContext, ToolContext } from '../../types.ts';
 
