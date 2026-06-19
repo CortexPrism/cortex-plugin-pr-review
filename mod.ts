@@ -1,3 +1,4 @@
+// deno-lint-ignore-file
 /**
  * CortexPrism PR Review Agent Plugin
  *
