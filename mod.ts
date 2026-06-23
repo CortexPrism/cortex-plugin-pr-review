@@ -9,7 +9,7 @@
  * #16 in the official plugin registry.
  */
 
-import type { PluginContext, Tool, ToolCallResult, ToolContext } from './types.ts';
+import type { PluginContext, Tool, ToolCallResult } from 'cortex/plugins';
 
 // ---------------------------------------------------------------------------
 // Module-level config (loaded in onLoad)
@@ -260,7 +260,7 @@ const reviewPr: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'review_pr';
     try {
@@ -434,7 +434,7 @@ const analyzeDiff: Tool = {
     capabilities: [],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'analyze_diff';
     try {
@@ -518,7 +518,7 @@ const checkSecurity: Tool = {
     capabilities: [],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'check_security';
     try {
@@ -615,7 +615,7 @@ const checkStyle: Tool = {
     capabilities: [],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'check_style';
     try {
@@ -732,7 +732,7 @@ const suggestFixes: Tool = {
     capabilities: [],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'suggest_fixes';
     try {
@@ -803,7 +803,7 @@ const reviewChecks: Tool = {
     capabilities: [],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'review_checks';
     try {

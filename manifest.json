@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-pr-review",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Automated PR code review \u2014 analyze diffs, check for bugs, security issues, and style violations, then comment inline with fix suggestions",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -148,7 +148,7 @@
   ],
   "dependencies": {},
   "peerDependencies": {
-    "cortex": ">=1.0.0"
+    "cortex": ">=0.51.0"
   },
   "ui": {
     "settings": [
@@ -166,8 +166,8 @@
             "label": "Auto-Approve Threshold",
             "type": "select",
             "description": "Automatically approve PRs when findings are below this severity",
-            "default": "none",
-            "enum": [
+            "defaultValue": "none",
+            "options": [
               {
                 "label": "Never",
                 "value": "none"
@@ -187,7 +187,7 @@
             "label": "Max Files Per Review",
             "type": "number",
             "description": "Maximum number of changed files to review in a single PR",
-            "default": 50
+            "defaultValue": 50
           }
         ]
       }
